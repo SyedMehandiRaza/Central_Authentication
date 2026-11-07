@@ -24,6 +24,7 @@ docs/execution/
 
 | Module | Prefix | Branch | Folder (git worktree) |
 | ------ | ------ | ------ | --------------------- |
+| auth   | AUTH   | `feature/auth` | main checkout (1st row) |
 
 ## Working on modules in parallel
 
