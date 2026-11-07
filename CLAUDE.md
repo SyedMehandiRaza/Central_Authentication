@@ -2,28 +2,25 @@
 
 ## Purpose
 
-[Project name and one-line purpose: fill in from `docs/PROJECT.md`.] This file is the entry point for project-wide instructions. Read the relevant files under `.claude/rules/` and `docs/` before making substantial changes.
+Central Authentication: a backend-only central authentication service. This file is the entry point for project-wide instructions. Read the relevant files under `.claude/rules/` and `docs/` before making substantial changes.
 
-## Stack (default, not yet confirmed for this project)
+## Stack (confirmed, see DEC-001)
 
-The rules and skills assume this stack. If the project uses something else, change this section, `docs/ARCHITECTURE.md` and the matching rules and skills first.
+**Backend only.** This project has no frontend or `e2e/` workspace, so frontend, Figma and Playwright instructions in this file, the rules and the skills do not apply, including the module workflow's Frontend and E2E steps. Validation parity means the `shared/` and supertest checks.
 
-- Language: JavaScript (ESM) everywhere, no TypeScript. npm workspaces: `shared/`, `backend/`, `frontend/`, `e2e/`.
+- Language: JavaScript (ESM) everywhere, no TypeScript. npm workspaces: `shared/`, `backend/`.
 - Backend: Node.js + Express 5, Sequelize + MySQL, JWT access token (Bearer header) + refresh token (httpOnly cookie, rotated, stored hashed)
-- Frontend: React + Vite, Redux Toolkit + RTK Query (auto-refresh on 401), React Router, react-hook-form
-- Validation: Zod. Schemas and error messages live once in `shared/` (`@app/shared`; rename to match the project) and are imported by both apps.
+- Validation: Zod. Schemas and error messages live once in `shared/` (`@app/shared`) and are imported by the backend.
 - Database: MySQL **8.0.16+ required (target 8.4 LTS; no 5.7 or MariaDB)**, checked at startup, via Sequelize; migrations and seeders are `.cjs` files in `backend/src/migrations` / `backend/src/seeders`
-- Tests: Jest (shared, backend with supertest, frontend with React Testing Library + MSW), Playwright (`e2e/`)
-- UI source of truth: Figma, read through the Figma MCP, one module at a time
+- Tests: Jest (shared, backend with supertest)
 
-## Commands (from the repo root, once `package.json` exists)
+## Commands (from the repo root)
 
-- `npm run dev`: backend (http://localhost:5000) + frontend (http://localhost:5173, proxies `/api`)
+- `npm run dev`: backend (http://localhost:5000)
 - `npm test`: all Jest suites. One workspace: `npm test -w backend`
-- `npm run test:e2e`: Playwright
-- `npm run lint`, `npm run format`, `npm run build`
-- `npm run check`: tests, lint, `prettier --check` and build in one go (run before every commit)
-- DB: `npm run db:migrate -w backend`, `npm run db:seed -w backend`, `npm run migration:new -w backend -- <name>` (rename the generated file to `.cjs`)
+- `npm run lint`, `npm run format`
+- `npm run check`: tests, lint and `prettier --check` in one go (run before every commit)
+- DB: `npm run db:create -w backend`, `npm run db:migrate -w backend`, `npm run db:seed -w backend`, `npm run migration:new -w backend -- <name>`, `npm run seed:new -w backend -- <name>` (rename the generated file to `.cjs`)
 
 ## First actions
 

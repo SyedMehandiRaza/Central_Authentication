@@ -1,0 +1,10 @@
+.claude/
+docs/
+script/
+coverage/
+node_modules/
+package-lock.json
+skills-lock.json
+*.md
+/models/
+*.sql

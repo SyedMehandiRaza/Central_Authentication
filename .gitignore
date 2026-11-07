@@ -2,6 +2,7 @@ node_modules/
 dist/
 build/
 coverage/
+models/
 
 # Environment and secrets
 .env
@@ -26,3 +27,7 @@ Thumbs.db
 
 # Playwright MCP browser snapshots and screenshots
 .playwright-mcp/
+ 
+# Reference dumps from other apps (may contain personal data; never commit)
+real_estate.sql
+*.sql.gz
